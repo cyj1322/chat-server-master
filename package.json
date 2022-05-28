@@ -28,11 +28,12 @@
     "debug:push": "nest start --path ./app/push/tsconfig.json --config ./app/push/nest-cli.json --debug --watch",
     "preprod:push": "yarn build:push",
     "prod:push": "node ./app/push/dist/main",
-    "test": "jest --config ./app/auth/test/jest.config.ts",
-    "test:watch": "jest ./app/auth --watch",
-    "test:cov": "jest ./app/auth --coverage",
-    "test:debug": "node ./app/auth --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest ./app/auth --config ./app/auth/test/jest-e2e.json"
+    "test:auth": "jest --coverage --config ./app/auth/test/jest.config.ts",
+    "test:watch:auth": "jest --watch --config ./app/auth/test/jest.config.ts",
+    "test:e2e:auth": "jest ./app/auth --config ./app/auth/test/jest-e2e.json",
+    "test:push": "jest --coverage --config ./app/push/test/jest.config.ts",
+    "test:watch:push": "jest --watch --config ./app/push/test/jest.config.ts",
+    "test:e2e:push": "jest ./app/push --config ./app/push/test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -43,10 +44,6 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-decorators": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-typescript": "^7.17.12",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
@@ -56,7 +53,6 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "babel-jest": "^28.1.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
