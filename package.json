@@ -6,19 +6,33 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start:auth": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "format": "prettier --write \"./app/**/src/**/*.ts\" \"./app/**/test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "prebuild:auth": "rimraf ./app/auth/dist",
+    "build:auth": "nest build --path ./app/auth/tsconfig.json --config ./app/auth/nest-cli.json",
+    "prestart:auth": "rimraf ./app/auth/dist",
+    "start:auth": "nest start --path ./app/auth/tsconfig.json --config ./app/auth/nest-cli.json",
+    "predev:auth": "rimraf ./app/auth/dist",
+    "dev:auth": "nest start --path ./app/auth/tsconfig.json --config ./app/auth/nest-cli.json --watch",
+    "predebug:auth": "rimraf ./app/auth/dist",
+    "debug:auth": "nest start --path ./app/auth/tsconfig.json --config ./app/auth/nest-cli.json --debug --watch",
+    "preprod:auth": "yarn build:auth",
+    "prod:auth": "node ./app/auth/dist/main",
+    "prebuild:push": "rimraf ./app/push/dist",
+    "build:push": "nest build --path ./app/push/tsconfig.json --config ./app/push/nest-cli.json",
+    "prestart:push": "rimraf ./app/push/dist",
+    "start:push": "nest start --path ./app/push/tsconfig.json --config ./app/push/nest-cli.json",
+    "predev:push": "rimraf ./app/push/dist",
+    "dev:push": "nest start --path ./app/push/tsconfig.json --config ./app/push/nest-cli.json --watch",
+    "predebug:push": "rimraf ./app/push/dist",
+    "debug:push": "nest start --path ./app/push/tsconfig.json --config ./app/push/nest-cli.json --debug --watch",
+    "preprod:push": "yarn build:push",
+    "prod:push": "node ./app/push/dist/main",
+    "test": "jest --config ./app/auth/test/jest.config.ts",
+    "test:watch": "jest ./app/auth --watch",
+    "test:cov": "jest ./app/auth --coverage",
+    "test:debug": "node ./app/auth --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest ./app/auth --config ./app/auth/test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -29,15 +43,20 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-proposal-decorators": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@types/express": "^4.17.13",
-    "@types/jest": "27.4.0",
+    "@types/jest": "^27.5.1",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "babel-jest": "^28.1.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -45,27 +64,13 @@
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^28.0.3",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "rootDir": "./"
   }
 }
