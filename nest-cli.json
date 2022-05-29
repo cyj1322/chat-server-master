@@ -1,0 +1,25 @@
+{
+  "collection": "@nestjs/schematics",
+  "monorepo": true,
+  "root": ".",
+  "projects": {
+    "auth": {
+      "type": "application",
+      "root": "app/auth",
+      "entryFile": "auth/src/main",
+      "sourceRoot": "app/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "app/auth/tsconfig.json"
+      }
+    },
+    "push": {
+      "type": "application",
+      "root": "app/push",
+      "entryFile": "main",
+      "sourceRoot": "app/push/src",
+      "compilerOptions": {
+        "tsConfigPath": "app/push/tsconfig.json"
+      }
+    }
+  }
+}
