@@ -7,11 +7,12 @@ module.exports = {
         type: Sequelize.UUID,
         primaryKey: true,
         allowNull: false,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
         comment: '사용자 ID',
       },
       id: {
         type: Sequelize.STRING(20),
+        unique: true,
         allowNull: false,
         comment: '로그인 ID',
       },
@@ -38,11 +39,13 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
         comment: '생성 일시',
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now'),
         comment: '수정 일시',
       },
     });
